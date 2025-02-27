@@ -9,7 +9,7 @@ import onewire
 import time
 
 # Default address 0x3C and default pins
-i2c = I2C(scl=Pin(21), sda=Pin(22))
+i2c = SoftI2C(sda=Pin(21), scl=Pin(22))
 display = ssd1306.SSD1306_I2C(128, 32, i2c)
 
 # DS18B20 temperature sensor
@@ -38,7 +38,9 @@ rgb = neopixel.NeoPixel(Pin(27), 4)
 # Connect to WiFi
 ifconfig = connect_to("<SSID>", "<PASSWD>")
 # Show IP address on display
-display.text(ifconfig[0])
+display.text("Running in...", 0, 0, 1)
+display.text(ifconfig[0], 0, 16, 1)
+display.show()
 
 # Create Microdot app instance
 app = Microdot()
